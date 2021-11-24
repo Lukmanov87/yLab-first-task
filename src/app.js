@@ -16,10 +16,7 @@ function App({store}) {
         <button onClick={() => store.createItem()}> Добавить</button>
       </div>
       <div className='App__center'>
-        <div className='List'>{store.getState().items.map(item =>
-          <ListItem key={item.code} store={store} item={item} />
-        )}
-        </div>
+        <ListItem store={store}/>
       </div>
     </div>
   );

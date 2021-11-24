@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function Item(props) {
+export function Item({store, item}) {
   const [count, setCount] = useState(0);
 
   const clickCount = () => {
@@ -8,23 +8,28 @@ export function Item(props) {
   };
 
   let title =
-    count < 1
-      ? props.item.title
-      : props.item.title + ` | Выделялся ${count} раз`;
+    count < 1 
+      ? item.title
+      : item.title + ` | Выделялся ${count} раз`;
 
   return (
     <div
-      className="Item"
-      onClick={() => props.store.selectItem(props.item.code)}
+      key={item.code}
+      className={"List__item" + (item.selected ? " List__item_selected" : "")}
     >
-      <div className="Item__number">{props.item.code}</div>
-      <div className="Item__title" onClick={clickCount}>
-        {title}
-      </div>
-      <div className="Item__actions">
-        <button onClick={() => props.store.deleteItem(props.item.code)}>
-          Удалить
-        </button>
+      <div
+        className="Item"
+        onClick={() => store.selectItem(item.code)}
+      >
+        <div className="Item__number">{item.code}</div>
+        <div className="Item__title" onClick={clickCount}>
+          {title}
+        </div>
+        <div className="Item__actions">
+          <button onClick={() => store.deleteItem(item.code)}>
+            Удалить
+          </button>
+        </div>
       </div>
     </div>
   );

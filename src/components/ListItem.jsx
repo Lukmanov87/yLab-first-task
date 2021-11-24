@@ -1,15 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Item } from "./Item";
 
-export function ListItem(props) {
-  const [selected, setSelect] = useState(false);
-
+export function ListItem({store}) {
   return (
-    <div
-      className={"List__item" + (selected ? " List__item_selected" : "")}
-      onClick={() => setSelect({ selected: !selected })}
-    >
-      <Item store={props.store} item={props.item} />
+    <div className='List'>{store.getState().items.map(item =>
+      <Item key={item.code} store={store} item={item} />
+    )}
     </div>
-  );
+  )  
 }
